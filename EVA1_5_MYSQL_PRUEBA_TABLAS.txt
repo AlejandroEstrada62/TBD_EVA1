@@ -1,0 +1,138 @@
+EVA1_5
+
+Microsoft Windows [Versión 10.0.22631.4037]
+(c) Microsoft Corporation. Todos los derechos reservados.
+
+C:\Users\estra>\sql
+"\sql" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+
+C:\Users\estra>mysql
+"mysql" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+
+C:\Users\estra>mysqlsh
+MySQL Shell 8.0.38
+
+Copyright (c) 2016, 2024, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching schema names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 8
+Server version: 8.0.39 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  JS > sql
+ReferenceError: sql is not defined
+ MySQL  localhost:3306 ssl  JS > \sql
+Switching to SQL mode... Commands end with ;
+Fetching global names for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  SQL > dec STUDENT;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dec STUDENT' at line 1
+ MySQL  localhost:3306 ssl  SQL > desc STUDENT;
+ERROR: 1046 (3D000): No database selected
+ MySQL  localhost:3306 ssl  SQL > show tables;
+ERROR: 1046 (3D000): No database selected
+ MySQL  localhost:3306 ssl  SQL > use tbd_e1;
+Default schema set to `tbd_e1`.
+Fetching global names, object names from `tbd_e1` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > show tables;
++------------------+
+| Tables_in_tbd_e1 |
++------------------+
+| primer_tabla     |
+| student          |
++------------------+
+2 rows in set (0.0123 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > desc student;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| name       | varchar(50)  | YES  |     | NULL    |       |
+| SSN        | varchar(11)  | YES  |     | NULL    |       |
+| Home_phone | varchar(8)   | YES  |     | NULL    |       |
+| Address    | varchar(100) | YES  |     | NULL    |       |
+| Age        | int          | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+5 rows in set (0.0203 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > instert into student
+                                       -> value ('Juan Perez','99-11',
+                                       -> '001122','av industrias 1101',00);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'instert into student
+value ('Juan Perez','99-11',
+'001122','av industrias 1101',' at line 1
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > insert into student value ('Juan Perez','99-11', '001122','av industrias 1101',00);
+Query OK, 1 row affected (0.0791 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > instert into studen (name)
+                                       -> value('Isaac');
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'instert into studen (name)
+value('Isaac')' at line 1
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > instert into student (name) value('Isaac');
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'instert into student (name) value('Isaac')' at line 1
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > insert into student (name) value('Isaac');
+Query OK, 1 row affected (0.0222 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > select * from student;
++------------+-------+------------+--------------------+------+
+| name       | SSN   | Home_phone | Address            | Age  |
++------------+-------+------------+--------------------+------+
+| Juan Perez | 99-11 | 001122     | av industrias 1101 |    0 |
+| Isaac      | NULL  | NULL       | NULL               | NULL |
++------------+-------+------------+--------------------+------+
+2 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > select name , ssn from student;
++------------+-------+
+| name       | ssn   |
++------------+-------+
+| Juan Perez | 99-11 |
+| Isaac      | NULL  |
++------------+-------+
+2 rows in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > insert into student (ssn) value ('56-15');
+Query OK, 1 row affected (0.0212 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > select ssn from student;
++-------+
+| ssn   |
++-------+
+| 99-11 |
+| NULL  |
+| 56-15 |
++-------+
+3 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > select count(*) from student;
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.0210 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > select * from student limit 1;
++------------+-------+------------+--------------------+-----+
+| name       | SSN   | Home_phone | Address            | Age |
++------------+-------+------------+--------------------+-----+
+| Juan Perez | 99-11 | 001122     | av industrias 1101 |   0 |
++------------+-------+------------+--------------------+-----+
+1 row in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > create table;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > create table carro;
+ERROR: 4028 (HY000): A table must have at least one visible column.
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > create table carro(
+                                       -> marca varchar, modelo varchar, año int, precio decimal, vin varchar, color varchar);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', modelo varchar, año int, precio decimal, vin varchar, color varchar)' at line 2
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > create table carro( marca varchar(30), modelo varchar(30), año int(30), precio decimal(30.38), vin varchar(30), color varchar(30));
+Query OK, 0 rows affected, 1 warning (0.0613 sec)
+Warning (code 1681): Integer display width is deprecated and will be removed in a future release.
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > insert into carro
+                                       -> value('volkswagen','jetta','2008','70000.00','62nh65','dorado');
+Query OK, 1 row affected (0.0215 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > select * from carro;
++------------+--------+------+--------+--------+--------+
+| marca      | modelo | año | precio | vin    | color  |
++------------+--------+------+--------+--------+--------+
+| volkswagen | jetta  | 2008 |  70000 | 62nh65 | dorado |
++------------+--------+------+--------+--------+--------+
+1 row in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL >
