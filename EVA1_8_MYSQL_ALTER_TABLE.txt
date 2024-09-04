@@ -1,0 +1,209 @@
+EVA1_8
+
+Microsoft Windows [Versión 10.0.22631.4037]
+(c) Microsoft Corporation. Todos los derechos reservados.
+
+C:\Users\estra>mysqlsh
+MySQL Shell 8.0.38
+
+Copyright (c) 2016, 2024, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > sql
+ReferenceError: sql is not defined
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect -mc root@localhost
+WARNING: The -mc option was deprecated, please use --mc instead. (Option has been processed as --mc).
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 8
+Server version: 8.0.39 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > use tbd_e1;
+Default schema set to `tbd_e1`.
+Fetching global names, object names from `tbd_e1` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > show tables;
++------------------+
+| Tables_in_tbd_e1 |
++------------------+
+| carro            |
+| cliente          |
+| clientes         |
+| mascota          |
+| peliculas        |
+| playeras         |
+| primer_tabla     |
+| student          |
+| tc               |
++------------------+
+9 rows in set (0.0129 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > alter table cliente drop razon_social;
+Query OK, 0 rows affected (0.0848 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > select * from cliente;
++----+--------+-------------------+------+--------------+----------------+
+| id | nombre | direccion         | rfc  | telefono     | denominacion   |
++----+--------+-------------------+------+--------------+----------------+
+|  1 | NULL   |  mina el progreso | NULL | 614 453 0956 | persona fisica |
++----+--------+-------------------+------+--------------+----------------+
+1 row in set (0.0010 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > alter table cliente
+                                       -> add column estado civil;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'civil' at line 2
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > alter table cliente add column estado_civil enum('soltero','casado','viudo','divorciado') not null;
+Query OK, 0 rows affected (0.0291 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > select * from cliente;
++----+--------+-------------------+------+--------------+----------------+--------------+
+| id | nombre | direccion         | rfc  | telefono     | denominacion   | estado_civil |
++----+--------+-------------------+------+--------------+----------------+--------------+
+|  1 | NULL   |  mina el progreso | NULL | 614 453 0956 | persona fisica | soltero      |
++----+--------+-------------------+------+--------------+----------------+--------------+
+1 row in set (0.0010 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > alter table cliente
+                                       -> change cloumn nombre
+                                       -> nombres varchar(50) not null;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'nombres varchar(50) not null' at line 3
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > alter table cliente change cloumn nombre nombres varchar(50) not null;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'nombres varchar(50) not null' at line 1
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > alter table cliente change column nombre nombres varchar(50) not null;
+ERROR: 1138 (22004): Invalid use of NULL value
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > alter table cliente change column nombre nombres varchar(50);
+Query OK, 0 rows affected (0.0229 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > select * from cliente;
++----+---------+-------------------+------+--------------+----------------+--------------+
+| id | nombres | direccion         | rfc  | telefono     | denominacion   | estado_civil |
++----+---------+-------------------+------+--------------+----------------+--------------+
+|  1 | NULL    |  mina el progreso | NULL | 614 453 0956 | persona fisica | soltero      |
++----+---------+-------------------+------+--------------+----------------+--------------+
+1 row in set (0.0010 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > rename table cliente clientess
+                                       -> ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'clientess' at line 1
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > drop clientes;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'clientes' at line 1
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > delete clientes;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > drop table clientes;
+Query OK, 0 rows affected (0.0167 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > shpw tables
+                                       -> ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'shpw tables' at line 1
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > show tables;
++------------------+
+| Tables_in_tbd_e1 |
++------------------+
+| carro            |
+| cliente          |
+| mascota          |
+| peliculas        |
+| playeras         |
+| primer_tabla     |
+| student          |
+| tc               |
++------------------+
+8 rows in set (0.0024 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > create table docente(id int auto_increment key, nombre varchar (50) not null, plaza varchar (50), horasplaza int (50), centrotrabajo varchar (50) not null, salario int (50), antiguedad int (50) not null);
+Query OK, 0 rows affected, 3 warnings (0.0352 sec)
+Warning (code 1681): Integer display width is deprecated and will be removed in a future release.
+Warning (code 1681): Integer display width is deprecated and will be removed in a future release.
+Warning (code 1681): Integer display width is deprecated and will be removed in a future release.
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > create table docente(id int auto_increment key, nombre varchar (50) not null, plaza varchar (50), horasplaza int (50), centrotrabajo varchar (50) not null, salario int (50), antiguedad int (50) not null);
+ERROR: 1050 (42S01): Table 'docente' already exists
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > create table docente(id int auto_increment key, nombre varchar (50) not null, plaza varchar (50), horasplaza int (50), centrotrabajo varchar (50) not null, salario int (50), antiguedad int (50) not null)
+                                       -> create table docente(id int auto_increment key, nombre varchar (50) not null, plaza varchar (50), horasplaza int (50), centrotrabajo varchar (50) not null, salario int (50), antiguedad int (50) not null);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'create table docente(id int auto_increment key, nombre varchar (50) not null, pl' at line 2
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > create table docente(nombre varchar (50) not null, plaza varchar (50), horasplaza int (50), centrotrabajo varchar (50) not null, salario int (50), antiguedad int (50) not null);
+ERROR: 1050 (42S01): Table 'docente' already exists
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > show tables;
++------------------+
+| Tables_in_tbd_e1 |
++------------------+
+| carro            |
+| cliente          |
+| docente          |
+| mascota          |
+| peliculas        |
+| playeras         |
+| primer_tabla     |
+| student          |
+| tc               |
++------------------+
+9 rows in set (0.0021 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > drop table docente;
+Query OK, 0 rows affected (0.0294 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > create table docente(nombre varchar (50) not null, plaza varchar (50), horasplaza int (50), centrotrabajo varchar (50) not null, salario int (50), antiguedad int (50) not null);
+Query OK, 0 rows affected, 3 warnings (0.0315 sec)
+Warning (code 1681): Integer display width is deprecated and will be removed in a future release.
+Warning (code 1681): Integer display width is deprecated and will be removed in a future release.
+Warning (code 1681): Integer display width is deprecated and will be removed in a future release.
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > insert into docente('Julio Profe', 'platino', '48','ciencias basicas','40000','20');
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''Julio Profe', 'platino', '48','ciencias basicas','40000','20')' at line 1
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > insert into docente value('Julio Profe', 'platino', '48','ciencias basicas','40000','20');
+Query OK, 1 row affected (0.0491 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > select * from docente
+                                       -> ;
++-------------+---------+------------+------------------+---------+------------+
+| nombre      | plaza   | horasplaza | centrotrabajo    | salario | antiguedad |
++-------------+---------+------------+------------------+---------+------------+
+| Julio Profe | platino |         48 | ciencias basicas |   40000 |         20 |
++-------------+---------+------------+------------------+---------+------------+
+1 row in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > alter table docente add column id int auto_increment key first, apellidos varchar(50) after nombre, rfc varchar (50) after apellidos;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'apellidos varchar(50) after nombre, rfc varchar (50) after apellidos' at line 1
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > alter table docente add column id int auto_increment key first, add apellidos varchar(50) after nombre, add rfc varchar (50) after apellidos;
+Query OK, 0 rows affected (0.1049 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > select * from docente;
++----+-------------+-----------+------+---------+------------+------------------+---------+------------+
+| id | nombre      | apellidos | rfc  | plaza   | horasplaza | centrotrabajo    | salario | antiguedad |
++----+-------------+-----------+------+---------+------------+------------------+---------+------------+
+|  1 | Julio Profe | NULL      | NULL | platino |         48 | ciencias basicas |   40000 |         20 |
++----+-------------+-----------+------+---------+------------+------------------+---------+------------+
+1 row in set (0.0010 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > alter table docente change column rfc
+                                       -> rfc varchar (13) not null;
+ERROR: 1265 (01000): Data truncated for column 'rfc' at row 1
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > alter table docente change column rfc  rfc varchar (13) not nualter table clientell;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'nualter table clientell' at line 1
+ MySQL  localhost:3306 ssl  tbd_e1  SQL >                                        -> change cloumn nombre
+                                       ->                                        -> nombres varchar(50) not null;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> change cloumn nombre
+                                       -> nombres varcha' at line 1
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > alter table docente change column rfc  rfc varchar (13);
+Query OK, 1 row affected (0.0709 sec)
+
+Records: 1  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > select * from docente;
++----+-------------+-----------+------+---------+------------+------------------+---------+------------+
+| id | nombre      | apellidos | rfc  | plaza   | horasplaza | centrotrabajo    | salario | antiguedad |
++----+-------------+-----------+------+---------+------------+------------------+---------+------------+
+|  1 | Julio Profe | NULL      | NULL | platino |         48 | ciencias basicas |   40000 |         20 |
++----+-------------+-----------+------+---------+------------+------------------+---------+------------+
+1 row in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > alter table docente change column plaza varchar (50) not null;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar (50) not null' at line 1
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > alter table docente change column plaza plaza varchar (50) not null;
+Query OK, 0 rows affected (0.0967 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > alter table docente change column horasplaza horas varchar (50) not null;
+Query OK, 1 row affected (0.0686 sec)
+
+Records: 1  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  tbd_e1  SQL > select * from docente;
++----+-------------+-----------+------+---------+-------+------------------+---------+------------+
+| id | nombre      | apellidos | rfc  | plaza   | horas | centrotrabajo    | salario | antiguedad |
++----+-------------+-----------+------+---------+-------+------------------+---------+------------+
+|  1 | Julio Profe | NULL      | NULL | platino | 48    | ciencias basicas |   40000 |         20 |
++----+-------------+-----------+------+---------+-------+------------------+---------+------------+
+1 row in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  tbd_e1  SQL >
